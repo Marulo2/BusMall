@@ -1,17 +1,21 @@
 'use strict';
 
+var allClicks = 0; //global counter
+
+
+//constructor function
 function Products(productName, path) {
-  this.productName = productName;
-  this.path = path;
-  this.clicks = 0;
-  this.productShown = 0;
+  this.productName = productName; //name of the product
+  this.path = path; //pathing location to call on the image
+  this.clicks = 0; //counting the number a particular image was clicked
+  this.productShown = 0; //how many times the product was displayed
   this.percentageClicked = 0;
   this.findPercentage = function () {
-    this.percentageClicked = (this.clicks / this.productShown).toFixed(2) * 100;
+    this.percentageClicked = (this.clicks / this.productShown).toFixed(3) * 100;
   };
 };
 
-var allClicks = 0;
+//instead of creating new instances one by one, we can create an array with every product in a single instance.
 
 var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('banana', 'img/banana.jpg'),
@@ -28,35 +32,47 @@ var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('usb', 'img/usb.gif'),
                   new Products('unicorn', 'img/unicorn.jpg')];
 
-var shownLeft = 0;
-var shownCenter = 0;
-var shownRight = 0;
+//
+//
+//
+
 var showLeft = document.getElementById('left');
 var showCenter = document.getElementById('center');
 var showRight = document.getElementById('right');
+var shownLeft = 0;
+var shownCenter = 0;
+var shownRight = 0;
+
+//need help understanding this part more, only got it running because I was referencing code review stuff
 
 function showProduct () {
-  shownLeft = Math.floor(Math.random()*allProducts.length);
+  shownLeft = Math.floor(Math.random() * allProducts.length);
   showLeft.innerHTML = '<img src ="' + allProducts[shownLeft].path + '">';
 
-  shownCenter = Math.floor(Math.random()*allProducts.length);
+  shownCenter = Math.floor(Math.random() * allProducts.length);
   while (shownCenter === shownLeft) {
-    shownCenter = Math.floor(Math.random()*allProducts.length);
+    shownCenter = Math.floor(Math.random() * allProducts.length);
   }
   showCenter.innerHTML = '<img src="' + allProducts[shownCenter].path + '">';
 
-  shownRight = Math.floor(Math.random()*allProducts.length);
+  shownRight = Math.floor(Math.random() * allProducts.length);
   while (shownRight === shownLeft || shownRight === shownCenter) {
-    shownRight = Math.floor(Math.random()*allProducts.length);
+    shownRight = Math.floor(Math.random() * allProducts.length);
   }
   showRight.innerHTML = '<img src="' + allProducts[shownRight].path + '">';
 }
 
 showProduct();
 
+//with the variables declared above, we can hook them up to event listeners to watch for clicks
+
 showLeft.addEventListener('click', handleLeft);
 showCenter.addEventListener('click', handleCenter);
 showRight.addEventListener('click', handleRight);
+
+//these functions will add +1 for every click and time an image is displayed on the screen.
+//the showProduct() function is called to renew a fresh set of random images
+//the button() function is called to enable the button once we've reached 15 clicks.
 
 function handleLeft () {
   allClicks++
@@ -68,6 +84,25 @@ function handleLeft () {
   showProduct();
 }
 
+//we need to get the button element on the HTML to give it more behavior
+
+var htmlButton = document.getElementById('showResults')
+
+function button() {
+  if (allClicks < 15) {
+    showResults.style.display = 'none';
+  }
+
+  else {
+    showResults.style.display = 'block';
+    // showRight.setAttribute('hidden', true); //hide images after 15 clicks
+    // showLeft.setAttribute('hidden', true);
+    // showCenter.setAttribute('hidden', true);
+  }
+};
+
+//same as before but for the center image.
+
 function handleCenter() {
   allClicks++;
   allProducts[shownCenter].clicks++;
@@ -77,6 +112,8 @@ function handleCenter() {
   button();
   showProduct();
 }
+
+//same as before but for the right image.
 
 function handleRight() {
   allClicks++;
@@ -88,17 +125,6 @@ function handleRight() {
   showProduct();
 }
 
-var htmlButton = document.getElementById('showResults')
-button();
-function button() {
-  if (allClicks < 15) {
-    showResults.style.display = 'none';
-  }
-
-  else {
-    showResults.style.display = 'block';
-  }
-};
 
 htmlButton.addEventListener('click', handleButton);
 
@@ -115,4 +141,21 @@ function handleButton(event) {
     showListedResults.appendChild(results);
   }
   displayResults.appendChild(showListedResults);
+}
+
+//chart.js stuff below
+
+var productGraph = document.getElementById('productGraph').getContext('2d');
+new Chart(productGraph).Bar(productData);
+
+var productData = {
+  labels: ['pen', 'baby', 'shark'],
+  datasets: [
+    {
+      label: Products.productName,
+      fillColor: '#48A497',
+      strokeColor: '#48A4D1',
+      data: [43, 63, 11]
+    }
+  ]
 }

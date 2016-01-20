@@ -1,6 +1,7 @@
 body {
-  background-image: url(http://4vector.com/i/free-vector-bus-05-vector_027301_buses_05.jpg);
-  background-repeat: no-repeat;
+  /*background-image: url(http://4vector.com/i/free-vector-bus-05-vector_027301_buses_05.jpg);*/
+  /*background-repeat: no-repeat;*/
+  background-color: lightblue;
 }
 
 header {
@@ -70,7 +71,8 @@ img {
   top: 110%;
   left: 50%;
   margin-top: -120px;
-  margin-left: -560px;
-  font-size: 26px;
-  background-color: lightblue;
+  margin-left: -660px;
+  font-size: 28px;
+  color: white;
+  background-color: darkblue;
 }

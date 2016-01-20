@@ -61,9 +61,9 @@ showProduct();
 
 //with the variables declared above, we can hook them up to event listeners to watch for clicks
 
-showLeft.addEventListener('click', handleLeft);
-showCenter.addEventListener('click', handleCenter);
-showRight.addEventListener('click', handleRight);
+showLeft.addEventListener('click', handleClick);
+showCenter.addEventListener('click', handleClick);
+showRight.addEventListener('click', handleClick);
 
 
 //we need to get the button element on the HTML to give it more behavior
@@ -88,31 +88,15 @@ function button() {
 //the showProduct() function is called to renew a fresh set of random images
 //the button() function is called to enable the button once we've reached 15 clicks.
 
-function handleLeft () {
+function handleClick () {
   allClicks++
   allProducts[shownLeft].clicks++;
-  button();
-  showProduct();
-}
-
-
-//same as before but for the center image.
-
-function handleCenter() {
-  allClicks++;
   allProducts[shownCenter].clicks++;
-  button();
-  showProduct();
-}
-
-//same as before but for the right image.
-
-function handleRight() {
-  allClicks++;
   allProducts[shownRight].clicks++;
   button();
   showProduct();
 }
+
 htmlButton.addEventListener('click', handleButton);
 
 function handleButton(event) {

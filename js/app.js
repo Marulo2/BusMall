@@ -8,6 +8,7 @@ function Products(productName, path) {
   this.productName = productName; //name of the product
   this.path = path; //pathing location to call on the image
   this.clicks = 0; //counting the number a particular image was clicked
+  this.displayedTimes = 0;
 };
 
 //instead of creating new instances one by one, we can create an array with every product in a single instance.
@@ -27,16 +28,12 @@ var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('usb', 'img/usb.gif'),
                   new Products('unicorn', 'img/unicorn.jpg')];
 
-//
-//
-//
-
 var showLeft = document.getElementById('left');
 var showCenter = document.getElementById('center');
 var showRight = document.getElementById('right');
-var shownLeft = 0;
-var shownCenter = 0;
-var shownRight = 0;
+var shownLeft;
+var shownCenter;
+var shownRight;
 
 //need help understanding this part more, only got it running because I was referencing code review stuff
 
@@ -61,9 +58,15 @@ showProduct();
 
 //with the variables declared above, we can hook them up to event listeners to watch for clicks
 
-showLeft.addEventListener('click', handleClick);
-showCenter.addEventListener('click', handleClick);
-showRight.addEventListener('click', handleClick);
+showLeft.addEventListener('click', function() {
+    handleClick(allProducts[shownLeft])
+  });
+showCenter.addEventListener('click', function() {
+    handleClick(allProducts[shownCenter])
+});
+showRight.addEventListener('click', function() {
+    handleClick(allProducts[shownRight])
+});
 
 
 //we need to get the button element on the HTML to give it more behavior
@@ -72,7 +75,7 @@ var htmlButton = document.getElementById('showResults')
 
 button();
 function button() {
-  if (allClicks < 15) {
+  if (allClicks < 3) {
     showResults.style.display = 'none';
   }
 
@@ -84,17 +87,20 @@ function button() {
   }
 };
 
-//these functions will add +1 for every click and time an image is displayed on the screen.
+//this function will add +1 for every click and time an image is displayed on the screen.
 //the showProduct() function is called to renew a fresh set of random images
 //the button() function is called to enable the button once we've reached 15 clicks.
 
-function handleClick () {
+function handleClick (objectClicked) {
   allClicks++
-  allProducts[shownLeft].clicks++;
-  allProducts[shownCenter].clicks++;
-  allProducts[shownRight].clicks++;
-  button();
+  muhClicks();
+  objectClicked.clicks++;
+  allProducts[shownLeft].displayedTimes++;
+  allProducts[shownCenter].displayedTimes++;
+  allProducts[shownRight].displayedTimes++;
   showProduct();
+  button();
+  console.log(objectClicked);
 }
 
 htmlButton.addEventListener('click', handleButton);
@@ -108,11 +114,17 @@ function handleButton(event) {
       {
         fillColor: "rgba(50,100,220,1)",
         strokeColor: "rgba(220,220,220,1)",
-        data: [allProducts[shownLeft].clicks++,
-                allProducts[shownCenter].clicks++,
-                allProducts[shownRight].clicks++]
+        data: clicksArray
       },
     ]
   }
   new Chart(myGraph).Bar(data);
+}
+
+var clicksArray = [];
+function muhClicks() {
+  clicksArray = [];
+  for (var i = 0; i < allProducts.length; i++) {
+    clicksArray.push(allProducts[i].clicks)
+  }
 }

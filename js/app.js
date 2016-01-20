@@ -35,9 +35,9 @@ var shownLeft;
 var shownCenter;
 var shownRight;
 
-//need help understanding this part more, only got it running because I was referencing code review stuff
-
 function showProduct () {
+
+                        //0 <= 1   *times*   13 --- since the array is 0 - 13.
   shownLeft = Math.floor(Math.random() * allProducts.length);
   showLeft.innerHTML = '<img src ="' + allProducts[shownLeft].path + '">';
 
@@ -59,7 +59,7 @@ showProduct();
 //with the variables declared above, we can hook them up to event listeners to watch for clicks
 
 showLeft.addEventListener('click', function() {
-    handleClick(allProducts[shownLeft])
+    handleClick(allProducts[shownLeft])  //anonymous function
   });
 showCenter.addEventListener('click', function() {
     handleClick(allProducts[shownCenter])
@@ -93,11 +93,11 @@ function button() {
 
 function handleClick (objectClicked) {
   allClicks++
-  muhClicks();
   objectClicked.clicks++;
   allProducts[shownLeft].displayedTimes++;
   allProducts[shownCenter].displayedTimes++;
   allProducts[shownRight].displayedTimes++;
+  muhClicks();
   showProduct();
   button();
   console.log(objectClicked);

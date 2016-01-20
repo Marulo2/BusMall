@@ -1,18 +1,13 @@
 'use strict';
 
 var allClicks = 0; //global counter
-
+var productLabels = ['Wine Glass', 'Banana', 'Bag', 'Boots', 'Chair', 'Dragon', 'Cthulhu', 'Pen', 'Scissors', 'Shark', 'Sweep', 'Water Can', 'Usb', 'Unicorn']
 
 //constructor function
 function Products(productName, path) {
   this.productName = productName; //name of the product
   this.path = path; //pathing location to call on the image
   this.clicks = 0; //counting the number a particular image was clicked
-  this.productShown = 0; //how many times the product was displayed
-  this.percentageClicked = 0;
-  this.findPercentage = function () {
-    this.percentageClicked = (this.clicks / this.productShown).toFixed(3) * 100;
-  };
 };
 
 //instead of creating new instances one by one, we can create an array with every product in a single instance.
@@ -70,24 +65,12 @@ showLeft.addEventListener('click', handleLeft);
 showCenter.addEventListener('click', handleCenter);
 showRight.addEventListener('click', handleRight);
 
-//these functions will add +1 for every click and time an image is displayed on the screen.
-//the showProduct() function is called to renew a fresh set of random images
-//the button() function is called to enable the button once we've reached 15 clicks.
-
-function handleLeft () {
-  allClicks++
-  allProducts[shownLeft].clicks++;
-  allProducts[shownLeft].productShown++;
-  allProducts[shownCenter].productShown++;
-  allProducts[shownRight].productShown++;
-  button();
-  showProduct();
-}
 
 //we need to get the button element on the HTML to give it more behavior
 
 var htmlButton = document.getElementById('showResults')
 
+button();
 function button() {
   if (allClicks < 15) {
     showResults.style.display = 'none';
@@ -101,14 +84,23 @@ function button() {
   }
 };
 
+//these functions will add +1 for every click and time an image is displayed on the screen.
+//the showProduct() function is called to renew a fresh set of random images
+//the button() function is called to enable the button once we've reached 15 clicks.
+
+function handleLeft () {
+  allClicks++
+  allProducts[shownLeft].clicks++;
+  button();
+  showProduct();
+}
+
+
 //same as before but for the center image.
 
 function handleCenter() {
   allClicks++;
   allProducts[shownCenter].clicks++;
-  allProducts[shownLeft].productShown++;
-  allProducts[shownCenter].productShown++;
-  allProducts[shownRight].productShown++;
   button();
   showProduct();
 }
@@ -118,44 +110,25 @@ function handleCenter() {
 function handleRight() {
   allClicks++;
   allProducts[shownRight].clicks++;
-  allProducts[shownLeft].productShown++;
-  allProducts[shownCenter].productShown++;
-  allProducts[shownRight].productShown++;
   button();
   showProduct();
 }
-
-
 htmlButton.addEventListener('click', handleButton);
 
 function handleButton(event) {
   showResults.textContent = 'Refresh Results';
-  var displayResults = document.getElementById('displayResults');
-  displayResults.textContent = '';
-  var showListedResults = document.createElement('ul');
-
-  for (var i = 0; i < allProducts.length; i++) {
-    allProducts[i].findPercentage();
-    var results = document.createElement('li');
-    results.textContent = allProducts[i].productName + ' was clicked ' + allProducts[i].clicks + ' times when shown to the viewer ' + allProducts[i].productShown + ' times. Total percentage: ' + allProducts[i].percentageClicked + '%.';
-    showListedResults.appendChild(results);
+  var myGraph = document.getElementById('myGraph').getContext('2d');
+  var data = {
+    labels: productLabels,
+    datasets: [
+      {
+        fillColor: "rgba(50,100,220,1)",
+        strokeColor: "rgba(220,220,220,1)",
+        data: [allProducts[shownLeft].clicks++,
+                allProducts[shownCenter].clicks++,
+                allProducts[shownRight].clicks++]
+      },
+    ]
   }
-  displayResults.appendChild(showListedResults);
-}
-
-//chart.js stuff below
-
-var productGraph = document.getElementById('productGraph').getContext('2d');
-new Chart(productGraph).Bar(productData);
-
-var productData = {
-  labels: ['pen', 'baby', 'shark'],
-  datasets: [
-    {
-      label: Products.productName,
-      fillColor: '#48A497',
-      strokeColor: '#48A4D1',
-      data: [43, 63, 11]
-    }
-  ]
+  new Chart(myGraph).Bar(data);
 }

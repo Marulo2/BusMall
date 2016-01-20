@@ -6,6 +6,7 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/skeleton.css" rel="styleesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="js/Chart.js"></script>
   </head>
 
   <body class="container">
@@ -15,17 +16,18 @@
     </header>
 
     <main class="row">
-      <div class="three columns" id="left"></div>
-      <div class="three columns" id="center"></div>
-      <div class="three columns" id="right"></div>
+      <div class="three columns">
+        <section id="left"></section>
+        <section id="center"></section>
+        <section id="right"></section>
+      </div>
 
-      <div class="row">
+      <div>
         <button id="showResults">Show Your Picks</button>
       </div>
 
       <div id="displayResults"></div>
 
-      <div class="chart" id="chartjs"></div>
 
     </main>
 
@@ -33,7 +35,7 @@
 
     </footer>
 
-
+    <canvas id="myGraph" width="600" height="400"></canvas>
     <script src="js/app.js"></script>
   </body>
 </html>

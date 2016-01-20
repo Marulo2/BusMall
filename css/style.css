@@ -1,5 +1,6 @@
 body {
-  background-image: url(http://www.autocarpro.in/IMG/794/7794/janbus-midi-email.jpg);
+  background-image: url(http://4vector.com/i/free-vector-bus-05-vector_027301_buses_05.jpg);
+  background-repeat: no-repeat;
 }
 
 header {
@@ -21,4 +22,55 @@ h1 {
 h2 {
   color: white;
   text-align: center;
+}
+
+img {
+  width: 410px;
+  height: 410px;
+}
+
+#left {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -700px;
+  border: 15px solid darkblue;
+}
+
+#center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -200px;
+  border: 15px solid darkblue;
+}
+
+#right {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: 300px;
+  border: 15px solid darkblue;
+}
+
+#showResults {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -120px;
+  font-size: 22px;
+}
+
+#displayResults {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin-top: -120px;
+  margin-left: -560px;
+  font-size: 26px;
+  background-color: lightblue;
 }

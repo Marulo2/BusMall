@@ -28,6 +28,24 @@ var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('usb', 'img/usb.gif'),
                   new Products('unicorn', 'img/unicorn.jpg')];
 
+var chartData = localStorage.getItem('chartPersist');
+if (chartData) {
+  allProducts = JSON.parse(chartData);
+} else {
+  console.log('Local storage empty! Initializing');
+  localStorage.setItem('chartPersist', JSON.stringify(allProducts));
+}
+
+var lsClear = document.getElementById('lsClear');
+
+function handleClear(){
+  console.log('You have cleared local storage');
+  localStorage.clear();
+}
+
+
+lsClear.addEventListener('click', handleClear)
+
 var showLeft = document.getElementById('left');
 var showCenter = document.getElementById('center');
 var showRight = document.getElementById('right');
@@ -101,10 +119,11 @@ function handleClick (objectClicked) {
   showProduct();
   button();
   console.log(objectClicked);
+  localStorage.setItem('chartPersist', JSON.stringify(allProducts));
 }
 
 htmlButton.addEventListener('click', handleButton);
-
+var data;
 function handleButton(event) {
   showResults.textContent = 'Refresh Results';
   var myGraph = document.getElementById('myGraph').getContext('2d');
@@ -120,6 +139,7 @@ function handleButton(event) {
   }
   new Chart(myGraph).Bar(data);
 }
+
 
 var clicksArray = [];
 function muhClicks() {

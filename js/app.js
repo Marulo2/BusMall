@@ -37,7 +37,7 @@ var shownRight;
 
 function showProduct () {
 
-                        //0 <= 1   *times*   13 --- since the array is 0 - 13.
+                        //0 <= .99999   *times*   13 --- since the array is 0 - 13.
   shownLeft = Math.floor(Math.random() * allProducts.length);
   showLeft.innerHTML = '<img src ="' + allProducts[shownLeft].path + '">';
 
@@ -60,7 +60,7 @@ showProduct();
 
 showLeft.addEventListener('click', function() {
     handleClick(allProducts[shownLeft])  //anonymous function
-  });
+});
 showCenter.addEventListener('click', function() {
     handleClick(allProducts[shownCenter])
 });
@@ -71,7 +71,6 @@ showRight.addEventListener('click', function() {
 
 //we need to get the button element on the HTML to give it more behavior
 
-var htmlButton = document.getElementById('showResults')
 
 button();
 function button() {
@@ -81,9 +80,6 @@ function button() {
 
   else {
     showResults.style.display = 'block';
-    // showRight.setAttribute('hidden', true); //hide images after 15 clicks
-    // showLeft.setAttribute('hidden', true);
-    // showCenter.setAttribute('hidden', true);
   }
 };
 
@@ -103,11 +99,13 @@ function handleClick (objectClicked) {
   console.log(objectClicked);
 }
 
-htmlButton.addEventListener('click', handleButton);
+var htmlButton = document.getElementById('showResults') //DOM query, then store the HTML button into the JS var
+htmlButton.addEventListener('click', handleButton); //we then add an event listener to the button that is waiting for a click
+
+var myGraph = document.getElementById('myGraph').getContext('2d');
 
 function handleButton(event) {
   showResults.textContent = 'Refresh Results';
-  var myGraph = document.getElementById('myGraph').getContext('2d');
   var data = {
     labels: productLabels,
     datasets: [
@@ -119,7 +117,7 @@ function handleButton(event) {
     ]
   }
   new Chart(myGraph).Bar(data);
-}
+};
 
 var clicksArray = [];
 function muhClicks() {
@@ -127,4 +125,46 @@ function muhClicks() {
   for (var i = 0; i < allProducts.length; i++) {
     clicksArray.push(allProducts[i].clicks)
   }
-}
+};
+
+
+// Web storage Notes
+
+// sessionStorage.setItem('user', 'John Doe')
+//   persists until window closes
+//
+// localStorage.setItem('user', 'John Doe')
+//   persists until removed
+//
+// simple key/value store
+// 10MB of primitives and JSON
+//
+// JSON - JavaScript Object Notation is a lightweight data-interchange format. it is easy for humans to read and write. It is easy for machines to parse and generate.
+//
+// examples:
+// this is what JSON looks like
+//   "{
+//     "value":8,
+//     "label":"hambella",
+//     "color":"#color",
+//     "highlight":"#color"
+//   }"
+//
+//   ---
+//
+// JS object to JSON
+//   JSON.stringify(myObject);
+//
+// JSON to JS object
+//   JSON.parse(myString);
+//
+//   ---
+//
+//   Methods
+//
+//   .setItem('key',  'value')
+//   .getItem('key')
+//   .removeItem('key')
+//   .clear()
+//   .key(index)
+//   .length

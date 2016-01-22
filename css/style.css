@@ -31,13 +31,13 @@ h3 {
 }
 
 img {
-  width: 410px;
+  width: 380px;
   height: 410px;
 }
 
 #left {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   margin-top: -200px;
   margin-left: -700px;
@@ -46,7 +46,7 @@ img {
 
 #center {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   margin-top: -200px;
   margin-left: -200px;
@@ -55,7 +55,7 @@ img {
 
 #right {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   margin-top: -200px;
   margin-left: 300px;

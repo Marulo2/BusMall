@@ -3,15 +3,12 @@
 var allClicks = 0; //global counter
 var productLabels = ['Wine Glass', 'Banana', 'Bag', 'Boots', 'Chair', 'Dragon', 'Cthulhu', 'Pen', 'Scissors', 'Shark', 'Sweep', 'Water Can', 'Usb', 'Unicorn']
 
-//constructor function
 function Products(productName, path) {
   this.productName = productName; //name of the product
   this.path = path; //pathing location to call on the image
   this.clicks = 0; //counting the number a particular image was clicked
   this.displayedTimes = 0;
 };
-
-//instead of creating new instances one by one, we can create an array with every product in a single instance.
 
 var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('banana', 'img/banana.jpg'),
@@ -28,6 +25,15 @@ var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('usb', 'img/usb.gif'),
                   new Products('unicorn', 'img/unicorn.jpg')];
 
+var chartData = localStorage.getItem('chartPersist');
+  if (chartData) {
+    allProducts = JSON.parse(chartData);
+  } else {
+    console.log('Local storage empty! Initializing');
+    localStorage.setItem('chartPersist', JSON.stringify(allProducts));
+  }
+
+var chartLegend = document.getElementById('chartLegend')
 var showLeft = document.getElementById('left');
 var showCenter = document.getElementById('center');
 var showRight = document.getElementById('right');
@@ -36,8 +42,6 @@ var shownCenter;
 var shownRight;
 
 function showProduct () {
-
-                        //0 <= .99999   *times*   13 --- since the array is 0 - 13.
   shownLeft = Math.floor(Math.random() * allProducts.length);
   showLeft.innerHTML = '<img src ="' + allProducts[shownLeft].path + '">';
 
@@ -56,8 +60,6 @@ function showProduct () {
 
 showProduct();
 
-//with the variables declared above, we can hook them up to event listeners to watch for clicks
-
 showLeft.addEventListener('click', function() {
     handleClick(allProducts[shownLeft])  //anonymous function
 });
@@ -68,26 +70,20 @@ showRight.addEventListener('click', function() {
     handleClick(allProducts[shownRight])
 });
 
-
-//we need to get the button element on the HTML to give it more behavior
-
-
 button();
 function button() {
   if (allClicks < 3) {
     showResults.style.display = 'none';
-    lsClear.style.display = 'none';
+    lsClear.style.display = 'none'
+    chartLegend.style.display = 'none';
   }
 
   else {
     showResults.style.display = 'block';
     lsClear.style.display = 'block';
+    chartLegend.style.display = 'block';
   }
 };
-
-//this function will add +1 for every click and time an image is displayed on the screen.
-//the showProduct() function is called to renew a fresh set of random images
-//the button() function is called to enable the button once we've reached 15 clicks.
 
 function handleClick (objectClicked) {
   allClicks++
@@ -99,6 +95,7 @@ function handleClick (objectClicked) {
   showProduct();
   button();
   console.log(objectClicked);
+  localStorage.setItem('chartPersist', JSON.stringify(allProducts));
 }
 
 var htmlButton = document.getElementById('showResults') //DOM query, then store the HTML button into the JS var
@@ -114,6 +111,8 @@ function handleButton(event) {
       {
         fillColor: "rgba(50,100,220,1)",
         strokeColor: "rgba(220,220,220,1)",
+        highlightFill: "rgba(50,200,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
         data: clicksArray
       },
     ]
@@ -129,44 +128,11 @@ function muhClicks() {
   }
 };
 
+var lsClear2 = document.getElementById('lsClear');
 
-// Web storage Notes
+lsClear2.addEventListener('click', handleClear);
 
-// sessionStorage.setItem('user', 'John Doe')
-//   persists until window closes
-//
-// localStorage.setItem('user', 'John Doe')
-//   persists until removed
-//
-// simple key/value store
-// 10MB of primitives and JSON
-//
-// JSON - JavaScript Object Notation is a lightweight data-interchange format. it is easy for humans to read and write. It is easy for machines to parse and generate.
-//
-// examples:
-// this is what JSON looks like
-//   "{
-//     "value":8,
-//     "label":"hambella",
-//     "color":"#color",
-//     "highlight":"#color"
-//   }"
-//
-//   ---
-//
-// JS object to JSON
-//   JSON.stringify(myObject);
-//
-// JSON to JS object
-//   JSON.parse(myString);
-//
-//   ---
-//
-//   Methods
-//
-//   .setItem('key',  'value')
-//   .getItem('key')
-//   .removeItem('key')
-//   .clear()
-//   .key(index)
-//   .length
+function handleClear() {
+  console.log('You have cleared storage data!');
+  localStorage.clear();
+}

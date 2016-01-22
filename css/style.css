@@ -5,13 +5,12 @@ body {
 }
 
 header {
+  position: absolute;
   top: 0px;
   left: 0px;
-  padding: 10px 10px 10px 10px;
   margin: 0px 0px 0px 0px;
   width: 100%;
   background-color: darkblue;
-  opacity: 0.9;
 }
 
 h1 {
@@ -29,50 +28,66 @@ h3 {
   text-align: center;
 }
 
+h4 {
+  text-align: center;
+  color:darkblue;
+  margin-top: 1240px;
+  margin-left: -140px;
+  font-size: 24px;
+}
+
 img {
   width: 350px;
   height: 350px;
+  border: 8px solid darkblue;
+  border-radius: 15px;
 }
 
 #left {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
-  margin-top: -200px;
+  right: 50%;
+  /*bottom: 60%;*/
+  margin-top: -300px;
   margin-left: -700px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #center {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
-  margin-top: -200px;
+  right: 50%;
+  /*bottom: 60%;*/
+  margin-top: -300px;
   margin-left: -200px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #right {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
-  margin-top: -200px;
+  right: 50%;
+  /*bottom: 60%;*/
+  margin-top: -300px;
   margin-left: 300px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #showResults {
   position: absolute;
-  top: 120%;
+  top: 1000px;
   left: 40%;
-  margin-top: -150px;
+  margin-top: -250px;
   margin-left: -120px;
   font-size: 22px;
 }
 
 #myGraph {
   position: absolute;
-  top: 130%;
+  top: 1100px;
   left: 50%;
   margin-top: -120px;
   margin-left: -660px;
@@ -80,9 +95,13 @@ img {
 
 #lsClear {
   position: absolute;
-  top: 120%;
+  top: 1000px;
   left: 60%;
-  margin-top: -150px;
+  margin-top: -250px;
   margin-left: -120px;
   font-size: 22px;
+}
+
+footer {
+  margin-top: 1600px;
 }

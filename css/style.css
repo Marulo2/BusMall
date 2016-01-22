@@ -8,11 +8,9 @@ header {
   position: absolute;
   top: 0px;
   left: 0px;
-  padding: 10px 10px 10px 10px;
   margin: 0px 0px 0px 0px;
   width: 100%;
   background-color: darkblue;
-  opacity: 0.9;
 }
 
 h1 {

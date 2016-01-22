@@ -5,6 +5,7 @@ body {
 }
 
 header {
+  position: absolute;
   top: 0px;
   left: 0px;
   padding: 10px 10px 10px 10px;
@@ -40,38 +41,46 @@ h4 {
 img {
   width: 350px;
   height: 350px;
+  border: 8px solid darkblue;
+  border-radius: 15px;
 }
 
 #left {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
+  right: 50%;
+  /*bottom: 60%;*/
   margin-top: -300px;
   margin-left: -700px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #center {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
+  right: 50%;
+  /*bottom: 60%;*/
   margin-top: -300px;
   margin-left: -200px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #right {
   position: absolute;
-  top: 70%;
+  top: 600px;
   left: 50%;
+  right: 50%;
+  /*bottom: 60%;*/
   margin-top: -300px;
   margin-left: 300px;
-  border: 15px solid darkblue;
+  /*border: 15px solid darkblue;*/
 }
 
 #showResults {
   position: absolute;
-  top: 120%;
+  top: 1000px;
   left: 40%;
   margin-top: -250px;
   margin-left: -120px;
@@ -80,7 +89,7 @@ img {
 
 #myGraph {
   position: absolute;
-  top: 130%;
+  top: 1100px;
   left: 50%;
   margin-top: -120px;
   margin-left: -660px;
@@ -88,7 +97,7 @@ img {
 
 #lsClear {
   position: absolute;
-  top: 120%;
+  top: 1000px;
   left: 60%;
   margin-top: -250px;
   margin-left: -120px;

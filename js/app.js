@@ -8,7 +8,7 @@ function Products(productName, path) {
   this.productName = productName; //name of the product
   this.path = path; //pathing location to call on the image
   this.clicks = 0; //counting the number a particular image was clicked
-  this.displayedTimes = 0;
+  this.displayedTimes = 0; 
 };
 
 //instead of creating new instances one by one, we can create an array with every product in a single instance.
@@ -46,8 +46,7 @@ var shownCenter;
 var shownRight;
 
 function showProduct () {
-
-                        //0 <= .99999   *times*   13 --- since the array is 0 - 13.
+                      //0 <= .99999   *times*   13 --- since the array is 0 - 13.
   shownLeft = Math.floor(Math.random() * allProducts.length);
   showLeft.innerHTML = '<img src ="' + allProducts[shownLeft].path + '">';
 

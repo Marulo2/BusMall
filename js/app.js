@@ -28,6 +28,16 @@ var allProducts = [new Products('wine-glass', 'img/wine-glass.jpg'),
                   new Products('usb', 'img/usb.gif'),
                   new Products('unicorn', 'img/unicorn.jpg')];
 
+
+var chartData = localStorage.getItem('chartPersist');
+  if (chartData) {
+    allProducts = JSON.parse(chartData);
+  } else {
+    console.log('Local storage empty! Initializing');
+    localStorage.setItem('chartPersist', JSON.stringify(allProducts));
+  }
+
+var chartLegend = document.getElementById('chartLegend')
 var showLeft = document.getElementById('left');
 var showCenter = document.getElementById('center');
 var showRight = document.getElementById('right');
@@ -76,12 +86,14 @@ button();
 function button() {
   if (allClicks < 3) {
     showResults.style.display = 'none';
-    lsClear.style.display = 'none';
+    lsClear.style.display = 'none'
+    chartLegend.style.display = 'none';
   }
 
   else {
     showResults.style.display = 'block';
     lsClear.style.display = 'block';
+    chartLegend.style.display = 'block';
   }
 };
 
@@ -99,6 +111,7 @@ function handleClick (objectClicked) {
   showProduct();
   button();
   console.log(objectClicked);
+  localStorage.setItem('chartPersist', JSON.stringify(allProducts));
 }
 
 var htmlButton = document.getElementById('showResults') //DOM query, then store the HTML button into the JS var
@@ -114,12 +127,15 @@ function handleButton(event) {
       {
         fillColor: "rgba(50,100,220,1)",
         strokeColor: "rgba(220,220,220,1)",
+        highlightFill: "rgba(50,200,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
         data: clicksArray
       },
     ]
   }
   new Chart(myGraph).Bar(data);
 };
+
 
 var clicksArray = [];
 function muhClicks() {
@@ -129,6 +145,14 @@ function muhClicks() {
   }
 };
 
+var lsClear2 = document.getElementById('lsClear');
+
+lsClear2.addEventListener('click', handleClear);
+
+function handleClear() {
+  console.log('You have cleared storage data!');
+  localStorage.clear();
+}
 
 // Web storage Notes
 

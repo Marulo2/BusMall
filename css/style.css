@@ -5,7 +5,6 @@ body {
 }
 
 header {
-  position: absolute;
   top: 0px;
   left: 0px;
   padding: 10px 10px 10px 10px;
@@ -31,13 +30,13 @@ h3 {
 }
 
 img {
-  width: 410px;
-  height: 410px;
+  width: 350px;
+  height: 350px;
 }
 
 #left {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   margin-top: -200px;
   margin-left: -700px;
@@ -46,7 +45,7 @@ img {
 
 #center {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   margin-top: -200px;
   margin-left: -200px;
@@ -55,7 +54,7 @@ img {
 
 #right {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   margin-top: -200px;
   margin-left: 300px;
@@ -64,8 +63,8 @@ img {
 
 #showResults {
   position: absolute;
-  top: 100%;
-  left: 50%;
+  top: 120%;
+  left: 40%;
   margin-top: -150px;
   margin-left: -120px;
   font-size: 22px;
@@ -73,8 +72,17 @@ img {
 
 #myGraph {
   position: absolute;
-  top: 110%;
+  top: 130%;
   left: 50%;
   margin-top: -120px;
   margin-left: -660px;
+}
+
+#lsClear {
+  position: absolute;
+  top: 120%;
+  left: 60%;
+  margin-top: -150px;
+  margin-left: -120px;
+  font-size: 22px;
 }
